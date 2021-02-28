@@ -1,15 +1,16 @@
 import { FC } from 'react'
 import styled from 'styled-components'
+import Header from './Header'
 
 const Container = styled.div``
 
-const Layout: FC = ({ children }) => {
+const PageLayout: FC = ({ children }) => {
   return (
     <Container>
-      <header>Header</header>
+      <Header />
       <main>{children}</main>
-      <footer></footer>
+      <footer>Footer</footer>
     </Container>
   )
 }
-export default Layout
+export default PageLayout

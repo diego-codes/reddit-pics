@@ -1,7 +1,12 @@
 import Head from 'next/head'
-import Layout from '../components/Layout'
+import { useQuery } from 'react-query'
+import GalleryGrid from '../components/GalleryGrid'
+import PageLayout from '../components/PageLayout'
+import { fetchImages } from '../services/reddit'
+import RedditImage from '../types/RedditImage'
 
 export default function Index() {
+  const { data, isLoading } = useQuery<RedditImage[]>('images', fetchImages)
   return (
     <>
       <Head>
@@ -9,7 +14,9 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>Home</Layout>
+      <PageLayout>
+        <GalleryGrid images={data} isLoading={isLoading}></GalleryGrid>
+      </PageLayout>
     </>
   )
 }
