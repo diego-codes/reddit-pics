@@ -1,14 +1,15 @@
 import Head from 'next/head'
+import Layout from '../components/Layout'
 
 export default function Index() {
   return (
-    <div>
+    <>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>Home</main>
-    </div>
+      <Layout>Home</Layout>
+    </>
   )
 }
