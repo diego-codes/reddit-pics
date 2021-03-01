@@ -4,10 +4,10 @@ import GalleryGrid from '../components/GalleryGrid'
 import LayoutContainer from '../components/LayoutContainer'
 import PageLayout from '../components/PageLayout'
 import { fetchImages } from '../services/reddit'
-import RedditImage from '../types/RedditImage'
+import RedditListing from '../types/RedditImage'
 
 export default function Index() {
-  const { data, isLoading } = useQuery<RedditImage[]>('images', fetchImages)
+  const { data, isLoading } = useQuery<RedditListing[]>('images', fetchImages)
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ export default function Index() {
 
       <PageLayout>
         <LayoutContainer>
-          <GalleryGrid images={data} isLoading={isLoading}></GalleryGrid>
+          <GalleryGrid listings={data} isLoading={isLoading}></GalleryGrid>
         </LayoutContainer>
       </PageLayout>
     </>

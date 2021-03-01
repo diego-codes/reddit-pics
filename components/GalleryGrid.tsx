@@ -12,21 +12,14 @@ const Grid = styled.div`
 `
 
 type GalleryGridProps = {
-  images: RedditImage[]
+  listings: RedditImage[]
   isLoading: boolean
 }
-const GalleryGrid: FC<GalleryGridProps> = ({ images = [], isLoading }) => {
+const GalleryGrid: FC<GalleryGridProps> = ({ listings = [], isLoading }) => {
   return (
     <Grid>
-      {images.map((image, index) => (
-        <Thumbnail
-          key={image.id || index}
-          src={image.thumbnail}
-          url={image.permalink}
-          isLoading={isLoading}
-        >
-          {image.title}
-        </Thumbnail>
+      {listings.map(listing => (
+        <Thumbnail key={listing.id} listing={listing} isLoading={isLoading} />
       ))}
     </Grid>
   )

@@ -2,13 +2,12 @@ import { FC } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Skeleton from './Skeleton'
+import RedditListing from '../types/RedditImage'
+import Card from './Card'
 
-const Container = styled.a`
+const LinkContainer = styled.a`
   color: inherit;
   text-decoration: none;
-  border: 1px solid ${props => props.theme.bg03};
-  background-color: ${props => props.theme.bg01};
-  border-radius: 3px;
 `
 
 const Figure = styled.figure`
@@ -44,26 +43,28 @@ const Caption = styled.figcaption`
   padding: 0.6em;
 `
 type ThumbnailProps = {
-  children: string
-  src: string
-  url: string
+  listing: RedditListing
   isLoading: boolean
 }
 
-const Thumbnail: FC<ThumbnailProps> = ({ children, src, url, isLoading }) => {
+const Thumbnail: FC<ThumbnailProps> = ({ listing, isLoading }) => {
   const content = (
-    <Container>
+    <Card>
       <Figure>
         <PictureContainer>
-          {!isLoading ? <Picture src={src} alt={children} /> : <Skeleton />}
+          {!isLoading ? (
+            <Picture src={listing.thumbnail} alt={listing.title} />
+          ) : (
+            <Skeleton />
+          )}
         </PictureContainer>
         {!isLoading ? (
-          <Caption>{children}</Caption>
+          <Caption>{listing.title}</Caption>
         ) : (
           <Skeleton blockSize="1.2em" inlineSize="100%" />
         )}
       </Figure>
-    </Container>
+    </Card>
   )
 
   if (isLoading) {
@@ -71,8 +72,8 @@ const Thumbnail: FC<ThumbnailProps> = ({ children, src, url, isLoading }) => {
   }
 
   return (
-    <Link href={url} passHref>
-      {content}
+    <Link href={`/${listing.id}`} passHref>
+      <LinkContainer>{content}</LinkContainer>
     </Link>
   )
 }

@@ -1,9 +1,9 @@
 import axios from 'axios'
-import RedditImage from '../types/RedditImage'
+import RedditListing from '../types/RedditImage'
 
 type RedditListingChildren = {
   kind: string
-  data: RedditImage
+  data: RedditListing
 }
 
 type RedditResponse = {
@@ -13,10 +13,11 @@ type RedditResponse = {
   }
 }
 
-const processListing = ({ data }): RedditImage => ({
-  ...data,
-  permalink: data.permalink.replace(`r/${data.subreddit}/comments/`, ''),
-})
+const filterNoThumbnailListings = ({
+  data,
+}: {
+  data: RedditListing
+}): boolean => data.thumbnail !== 'self' && data.thumbnail !== 'nsfw'
 
 const BASE_URL = 'http://www.reddit.com/r/pics'
 const EXTENSION = '.json?jsonp='
@@ -25,12 +26,15 @@ export const fetchImages = () =>
   axios
     .get(`${BASE_URL}/${EXTENSION}`)
     .then(({ data }: { data: RedditResponse }) =>
-      data.data.children.map(processListing),
+      data.data.children
+        .filter(filterNoThumbnailListings)
+        .map(({ data }) => data),
     )
 
-export const fetchImage = (username: string, post: string) =>
+export const fetchImage = (id: string) =>
   axios
-    .get(`${BASE_URL}/comments/${username}/${post}/${EXTENSION}`)
-    .then(({ data }: { data: RedditResponse[] }) =>
-      data[0].data.children.map(processListing),
+    .get(`${BASE_URL}/comments/${id}/${EXTENSION}`)
+    .then(
+      ({ data }: { data: RedditResponse[] }) =>
+        data[0].data.children.map(({ data }) => data)[0],
     )

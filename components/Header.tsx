@@ -3,8 +3,7 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import LayoutContainer from './LayoutContainer'
 
-const Container = styled(LayoutContainer)`
-  color: red !important;
+const Container = styled.div`
   background-color: ${props => props.theme.bg01};
   border-block-end: 1px solid ${props => props.theme.bg03};
 `
@@ -28,14 +27,16 @@ const TitleLink = styled.a`
 const Header: FC = ({ children }) => {
   return (
     <Container>
-      <Content>
-        <Title>
-          <Link href="/" passHref>
-            <TitleLink>Reddit Pics</TitleLink>
-          </Link>
-        </Title>
-        {children && <div>{children}</div>}
-      </Content>
+      <LayoutContainer>
+        <Content>
+          <Title>
+            <Link href="/" passHref>
+              <TitleLink>Reddit Pics</TitleLink>
+            </Link>
+          </Title>
+          {children && <div>{children}</div>}
+        </Content>
+      </LayoutContainer>
     </Container>
   )
 }
