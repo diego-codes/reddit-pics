@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { getResponseTypeStyle, Size } from '../styles/typography'
+import { getSingleResponsiveTypographyStyle, Size } from '../styles/typography'
 import LayoutContainer from './LayoutContainer'
 import StyledLink from './StyledLink'
 
 const Container = styled.footer`
-  ${getResponseTypeStyle(Size.Small)}
+  ${getSingleResponsiveTypographyStyle(Size.Small)}
   padding-block-start: 1em;
   padding-block-end: 1em;
   background-color: ${props => props.theme.bg03};

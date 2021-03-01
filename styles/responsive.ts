@@ -9,5 +9,3 @@ export enum Breakpoint {
 export const mediaQuery = (size: Breakpoint | number) => `
   @media (min-width: ${size}em)
 `
-
-export default mediaQuery

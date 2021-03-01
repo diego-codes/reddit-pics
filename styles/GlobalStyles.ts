@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 import { Breakpoint } from './responsive'
 import {
   DefaultScale,
-  getResponseTypeScaleStyles,
-  getTypeScaleStyles,
+  getResponsiveTypographyScaleStyles,
+  getTypographyScaleStyles,
   ResponsiveScales,
 } from './typography'
 
@@ -17,6 +17,7 @@ export default createGlobalStyle`
     font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 300;
     line-height: 1.75;
+    font-size: 87.5%;
     
     background-color: ${props => props.theme.bg02};
     color: ${props => props.theme.text01}
@@ -36,22 +37,18 @@ export default createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5 {
-    margin-block-start: 3rem;
+    margin-block-start: 0rem;
     margin-block-end: 1.38rem;
-    font-weight: inherit;
+    font-weight: 400;
     line-height: 1.3;
     color: ${props => props.theme.text02}
   }
 
-  h1 {
-    margin-top: 0;
-  }
-
-  ${getTypeScaleStyles(DefaultScale)}
+  ${getTypographyScaleStyles(DefaultScale)}
 
   ${Object.entries(ResponsiveScales)
     .map(([breakpoint, sizes]) =>
-      getResponseTypeScaleStyles(breakpoint as Breakpoint, sizes),
+      getResponsiveTypographyScaleStyles(breakpoint as Breakpoint, sizes),
     )
     .join('\n')}
 
@@ -64,7 +61,7 @@ export default createGlobalStyle`
     block-size: auto;
   }
 
-  a:any-link  {
+  a, a:visited  {
     color: inherit;
     
     &:focus {

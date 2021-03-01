@@ -1,12 +1,12 @@
 import { Breakpoint, mediaQuery } from './responsive'
 
 export enum Size {
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  Small,
+  H1 = 'h1',
+  H2 = 'h2',
+  H3 = 'h3',
+  H4 = 'h4',
+  H5 = 'h5',
+  Small = 'small',
 }
 
 type TypographyScale = {
@@ -27,16 +27,16 @@ type ResponsiveTyporaphyScale = {
 }
 export const ResponsiveScales: ResponsiveTyporaphyScale = {
   [Breakpoint.MD]: {
-    [Size.H1]: '2.488rem',
-    [Size.H2]: '2.074rem',
-    [Size.H3]: '1.728rem',
-    [Size.H4]: '1.44rem',
-    [Size.H5]: '1.2rem',
-    [Size.Small]: '0.833rem',
+    [Size.H1]: '1.802rem',
+    [Size.H2]: '1.602rem',
+    [Size.H3]: '1.424rem',
+    [Size.H4]: '1.266rem',
+    [Size.H5]: '1.125rem',
+    [Size.Small]: '0.889rem',
   },
 }
 
-export const getTypeScaleStyles = (scale: TypographyScale) =>
+export const getTypographyScaleStyles = (scale: TypographyScale) =>
   Object.entries(scale)
     .map(
       ([selector, size]) =>
@@ -48,16 +48,16 @@ export const getTypeScaleStyles = (scale: TypographyScale) =>
     )
     .join('\n')
 
-export const getResponseTypeScaleStyles = (
+export const getResponsiveTypographyScaleStyles = (
   breakpoint: Breakpoint,
   scale: TypographyScale,
 ) => `
   ${mediaQuery(breakpoint)} {
-    ${getTypeScaleStyles(scale)}
+    ${getTypographyScaleStyles(scale)}
   }
 `
 
-export const getResponseTypeStyle = (size: Size) => `
+export const getSingleResponsiveTypographyStyle = (size: Size) => `
   font-size: ${DefaultScale[size]};
 
   ${Object.entries(ResponsiveScales).map(

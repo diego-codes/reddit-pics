@@ -1,12 +1,29 @@
-type RedditListing = {
+type RedditImage = {
+  height: number
+  width: number
+}
+
+export type RedditObject = {
   id: string
+  author: string
+  score: number
+  permalink: string
+  created: number
+}
+
+export type RedditListing = RedditObject & {
   url: string
   thumbnail: string
   title: string
-  permalink: string
   subreddit: string
-  author: string
-  score: number
+  preview?: {
+    images: {
+      source: RedditImage
+      resolutions: RedditImage[]
+    }[]
+  }
 }
 
-export default RedditListing
+export type RedditComment = RedditObject & {
+  body: string
+}

@@ -8,9 +8,6 @@ export const hoverStyles = css`
 `
 
 export const styles = css`
-  display: inline-block;
-  padding-inline-start: 0.2em;
-  padding-inline-end: 0.2em;
   background: linear-gradient(
       transparent 0%,
       ${props => props.theme.primary} 0%
