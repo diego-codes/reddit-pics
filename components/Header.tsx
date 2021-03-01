@@ -7,7 +7,8 @@ const StickyContainer = styled.div`
   inset-block-start: 0;
   inset-inline-start: 0;
   inline-size: 100%;
-  z-index: 2;
+  position: sticky;
+  background-color: ${props => props.theme.bg02};
 `
 
 const Container = styled.div`

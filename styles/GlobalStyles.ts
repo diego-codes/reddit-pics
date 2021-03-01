@@ -14,7 +14,7 @@ export default createGlobalStyle`
 
   html {
     box-sizing: border-box;
-    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+    font-family: 'Rubik', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 300;
     line-height: 1.75;
     
