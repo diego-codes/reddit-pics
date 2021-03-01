@@ -7,13 +7,14 @@ import PageLayout from '../components/PageLayout'
 import { RedditComment, RedditListing } from '../types/RedditImage'
 import ImageDetails from '../components/ImageDetails'
 import LayoutContainer from '../components/LayoutContainer'
+import Loading from '../components/Loading'
 
 export default function Post() {
   const {
     query: { id },
   } = useRouter()
 
-  const { data, isSuccess } = useQuery<{
+  const { data } = useQuery<{
     listing: RedditListing
     comments: RedditComment[]
   }>(['images', { id }], () => fetchImage(id as string), { enabled: !!id })
@@ -21,13 +22,15 @@ export default function Post() {
   return (
     <>
       <Head>
-        <title>Reddit Pics{isSuccess ? ` - ${data.listing.title}` : ''}</title>
+        <title>Reddit Pics{data ? ` - ${data?.listing.title}` : ''}</title>
       </Head>
 
       <PageLayout>
         <LayoutContainer>
-          {isSuccess && (
+          {data ? (
             <ImageDetails listing={data.listing} comments={data.comments} />
+          ) : (
+            <Loading>Loading image</Loading>
           )}
         </LayoutContainer>
       </PageLayout>

@@ -64,3 +64,5 @@ There are some aspects of the application that I would work on if I had more tim
 - Add Reddit sorting options in the gallery view like "new", "hot", "best", and "rising".
 - Better loading states using skeletons for the layout that is loading.
 - Have higher-quality thumbnail images.
+- Handle loading errors and let the user know how to resolve the problem.
+- User Reddit's various image resolution sizes to serve the user the appropriate image for their device's size.
