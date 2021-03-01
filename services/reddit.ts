@@ -10,6 +10,7 @@ type RedditResponse<T = RedditListing | RedditComment> = {
   kind: string
   data: {
     children: RedditListingChildren<T>[]
+    after?: string
   }
 }
 
@@ -21,18 +22,19 @@ const filterNoThumbnailListings = ({
 const BASE_URL = 'https://www.reddit.com/r/pics'
 const EXTENSION = '.json'
 
-export const fetchImages = (search?: string) =>
+export const fetchImages = (search?: string, after?: string) =>
   axios
     .get(
-      `${BASE_URL}/${
-        search ? `search/${EXTENSION}?q=${search}&restrict_sr=1` : EXTENSION
-      }`,
+      `${BASE_URL}/${search ? 'search/' : ''}${EXTENSION}?${
+        search ? `q=${search}&restrict_sr=1` : ''
+      }${after ? `&after=${after}` : ''}`,
     )
-    .then(({ data }: { data: RedditResponse<RedditListing> }) =>
-      data.data.children
+    .then(({ data }: { data: RedditResponse<RedditListing> }) => ({
+      listings: data.data.children
         .filter(filterNoThumbnailListings)
         .map(({ data }) => data),
-    )
+      after: data.data.after,
+    }))
 
 export const fetchImage = (id: string) =>
   axios

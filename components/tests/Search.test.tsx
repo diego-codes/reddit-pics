@@ -1,5 +1,5 @@
 import Search from '../Search'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 it('accepts an initial value', () => {
@@ -17,6 +17,6 @@ it('submits typed search', () => {
     screen.getByRole('searchbox', { name: /search pics/i }),
     'new search',
   )
-  fireEvent.submit(screen.getByRole('searchbox', { name: /search pics/i }))
+  userEvent.click(screen.getByRole('button', { name: /search/i }))
   expect(onSubmitMock).toHaveBeenCalledWith('new search')
 })

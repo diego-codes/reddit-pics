@@ -1,8 +1,10 @@
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
-import { useQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
 import GalleryGrid from '../components/GalleryGrid'
+import GalleryTitle from '../components/GalleryTitle'
 import LayoutContainer from '../components/LayoutContainer'
+import Loading from '../components/Loading'
 import PageLayout from '../components/PageLayout'
 import { fetchImages } from '../services/reddit'
 import { RedditListing } from '../types/RedditImage'
@@ -12,9 +14,14 @@ export default function Index() {
     query: { s },
   } = useRouter()
 
-  const { data } = useQuery<RedditListing[]>(['images', s], () =>
-    fetchImages(s as string),
-  )
+  const search = s as string
+
+  const { data, fetchNextPage, isLoading, hasNextPage } = useInfiniteQuery<{
+    listings: RedditListing[]
+    after?: string
+  }>(['images', search], ({ pageParam }) => fetchImages(search, pageParam), {
+    getNextPageParam: ({ after }) => after,
+  })
 
   return (
     <>
@@ -25,7 +32,12 @@ export default function Index() {
 
       <PageLayout>
         <LayoutContainer>
-          <GalleryGrid listings={data}></GalleryGrid>
+          <GalleryTitle search={search} />
+          <GalleryGrid
+            listings={data?.pages.map(page => page.listings).flat()}
+            loadMore={fetchNextPage}
+          ></GalleryGrid>
+          {(isLoading || hasNextPage) && <Loading>Loading images</Loading>}
         </LayoutContainer>
       </PageLayout>
     </>

@@ -1,5 +1,6 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import styled from 'styled-components'
+import { debounce } from 'throttle-debounce'
 import { Breakpoint, mediaQuery } from '../styles/responsive'
 import { RedditListing } from '../types/RedditImage'
 import Thumbnail from './Thumbnail'
@@ -23,10 +24,29 @@ const Grid = styled.div`
 
 type GalleryGridProps = {
   listings: RedditListing[]
+  loadMore: () => void
 }
-const GalleryGrid: FC<GalleryGridProps> = ({ listings = [] }) => {
+const GalleryGrid: FC<GalleryGridProps> = ({ listings = [], loadMore }) => {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const grid = gridRef.current
+    const handleScroll = debounce(100, () => {
+      if (
+        grid &&
+        grid.getBoundingClientRect().bottom - window.innerHeight < 1000
+      ) {
+        loadMore()
+      }
+    })
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [gridRef])
   return (
-    <Grid>
+    <Grid ref={gridRef}>
       {listings.map(listing => (
         <Thumbnail key={listing.id} listing={listing} />
       ))}

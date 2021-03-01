@@ -1,10 +1,23 @@
 import { FC, useState, FormEventHandler, ChangeEventHandler } from 'react'
+import styled from 'styled-components'
+import SearchIcon from '../icons/SearchIcon'
+import Button from './Button'
 import TextInput from './TextInput'
+
+const Form = styled.form`
+  display: flex;
+  align-items: stretch;
+
+  > *:first-child {
+    margin-inline-end: 0.3em;
+  }
+`
 
 type SearchProps = {
   initialValue?: string
   onSubmit?: (value: string) => void
 }
+
 const Search: FC<SearchProps> = ({
   initialValue = '',
   onSubmit = () => {},
@@ -21,7 +34,7 @@ const Search: FC<SearchProps> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <TextInput
         id="img-search"
         aria-label="Search pics"
@@ -30,7 +43,10 @@ const Search: FC<SearchProps> = ({
         value={value}
         onChange={handleValueChage}
       />
-    </form>
+      <Button type="submit" aria-label="Search">
+        <SearchIcon />
+      </Button>
+    </Form>
   )
 }
 
