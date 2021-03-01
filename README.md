@@ -1,34 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Reddit Pics
 
-## Getting Started
+This app was built as a programming challenge for [Assembly](joinassembly). You may find a live demo [here](https://reddit-pics.vercel.app/).
 
-First, run the development server:
+## Running locally
+
+### Prerequisites
+
+To run this application locally, you should have the following tool versions:
+
+- node `v15.5.1`
+- npm `v7.3.0`
+
+### Installation
+
+If you have the appropriate tool versions, you can start by installing the dependencies first:
+
+```bash
+npm install
+```
+
+### Running locally
+
+To run the application locally, run the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After the application builds, you may go to http://localhost:3000/ to see it.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Running tests
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+There aren't a lot of unit tests, but if you wish you run the test, run the following command:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm test
+```
 
-## Learn More
+## About application
 
-To learn more about Next.js, take a look at the following resources:
+This simple application takes post information from the [r/pics](https://reddit.com/r/pics) subreddit and displays them in a gallery. Some of the features to note are:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Search for pics by their title
+- Infinitely scrolling gallery
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### The tech stack
 
-## Deploy on Vercel
+This application was built using:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js
+- React
+- React query
+- Styled components
+- Typescript
+- Jest & React testing library
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Future improvements
+
+There are some aspects of the application that I would work on if I had more time:
+
+- Add more unit tests.
+- Create end-to-end tests.
+- Add Reddit sorting options in the gallery view like "new", "hot", "best", and "rising".
+- Better loading states using skeletons for the layout that is loading.
+- Have higher-quality thumbnail images.
