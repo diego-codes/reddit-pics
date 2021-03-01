@@ -1,6 +1,5 @@
 import { useRouter } from 'next/dist/client/router'
-import Head from 'next/head'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
 import Search from './Search'

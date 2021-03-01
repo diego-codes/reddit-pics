@@ -34,6 +34,3 @@ export default function Post() {
     </>
   )
 }
-
-;('http://www.reddit.com/r/pics/comments/luybk1/.json?jsonp=')
-;('https://www.reddit.com/r/pics/comments/luybk1/.json?jsonp=')
