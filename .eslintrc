@@ -46,6 +46,10 @@
     "react/prop-types": 0,
     "react/jsx-key": 2,
     "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }],
-    "@typescript-eslint/explicit-module-boundary-types": 0
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      { "allow": ["arrowFunctions"] }
+    ]
   }
 }

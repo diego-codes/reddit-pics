@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useQuery } from 'react-query'
 import GalleryGrid from '../components/GalleryGrid'
@@ -7,7 +8,14 @@ import { fetchImages } from '../services/reddit'
 import RedditListing from '../types/RedditImage'
 
 export default function Index() {
-  const { data, isLoading } = useQuery<RedditListing[]>('images', fetchImages)
+  const {
+    query: { s },
+  } = useRouter()
+
+  const { data, isLoading } = useQuery<RedditListing[]>(['images', s], () =>
+    fetchImages(s as string),
+  )
+
   return (
     <>
       <Head>

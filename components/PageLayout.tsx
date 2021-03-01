@@ -1,7 +1,9 @@
+import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
+import Search from './Search'
 
 const Container = styled.div``
 
@@ -15,17 +17,25 @@ const HeaderWrapper = styled.div`
 `
 
 const PageLayout: FC = ({ children }) => {
+  const {
+    push,
+    query: { s },
+  } = useRouter()
+
+  const handleSubmit = (value: string) => {
+    push(`/?s=${value}`)
+  }
+
   return (
     <Container>
-      <Head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <HeaderWrapper>
-        <Header />
+        <Header>
+          <Search
+            key={s as string}
+            initialValue={s as string}
+            onSubmit={handleSubmit}
+          />
+        </Header>
       </HeaderWrapper>
       <main>{children}</main>
       <footer>Footer</footer>

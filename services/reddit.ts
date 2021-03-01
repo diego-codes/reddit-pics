@@ -19,12 +19,16 @@ const filterNoThumbnailListings = ({
   data: RedditListing
 }): boolean => data.thumbnail !== 'self' && data.thumbnail !== 'nsfw'
 
-const BASE_URL = 'http://www.reddit.com/r/pics'
-const EXTENSION = '.json?jsonp='
+const BASE_URL = 'https://www.reddit.com/r/pics'
+const EXTENSION = '.json'
 
-export const fetchImages = () =>
+export const fetchImages = (search?: string) =>
   axios
-    .get(`${BASE_URL}/${EXTENSION}`)
+    .get(
+      `${BASE_URL}/${
+        search ? `search/${EXTENSION}?q=${search}&restrict_sr=1` : EXTENSION
+      }`,
+    )
     .then(({ data }: { data: RedditResponse }) =>
       data.data.children
         .filter(filterNoThumbnailListings)

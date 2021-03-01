@@ -9,25 +9,31 @@ import ImageDetails from '../components/ImageDetails'
 import LayoutContainer from '../components/LayoutContainer'
 
 export default function Post() {
-  const router = useRouter()
-  const { id } = router.query
+  const {
+    query: { id },
+  } = useRouter()
 
-  const { data, isLoading } = useQuery<RedditListing>(['image', { id }], () =>
-    fetchImage(id as string),
+  const { data, isSuccess } = useQuery<RedditListing>(
+    ['images', { id }],
+    () => fetchImage(id as string),
+    { enabled: !!id },
   )
 
   return (
     <>
       <Head>
-        <title>Reddit Pics{!isLoading ? ` - ${data.title}` : ''}</title>
+        <title>Reddit Pics{isSuccess ? ` - ${data.title}` : ''}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <PageLayout>
         <LayoutContainer>
-          {!isLoading && <ImageDetails listing={data}></ImageDetails>}
+          {isSuccess && <ImageDetails listing={data}></ImageDetails>}
         </LayoutContainer>
       </PageLayout>
     </>
   )
 }
+
+;('http://www.reddit.com/r/pics/comments/luybk1/.json?jsonp=')
+;('https://www.reddit.com/r/pics/comments/luybk1/.json?jsonp=')
