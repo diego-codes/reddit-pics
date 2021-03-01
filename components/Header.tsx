@@ -4,8 +4,15 @@ import styled from 'styled-components'
 import LayoutContainer from './LayoutContainer'
 
 const Container = styled.div`
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  z-index: 2;
   background-color: ${props => props.theme.bg01};
-  border-block-end: 1px solid ${props => props.theme.bg03};
+  border-block-end: 1px solid ${props => props.theme.border01};
+  padding-block-start: 0.5em;
+  padding-block-end: 0.5em;
+  position: sticky;
 `
 const Content = styled.div`
   display: flex;

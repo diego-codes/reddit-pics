@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const TextInput = styled.input`
   background-color: ${props => props.theme.bg01};
-  border: 1px solid ${props => props.theme.bg03};
+  border: 1px solid ${props => props.theme.border01};
   color: inherit;
   font: inherit;
   padding: 0.1em 0.4em;

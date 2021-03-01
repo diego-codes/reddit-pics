@@ -49,7 +49,7 @@ type ThumbnailProps = {
 
 const Thumbnail: FC<ThumbnailProps> = ({ listing, isLoading }) => {
   const content = (
-    <Card>
+    <Card title={listing.title}>
       <Figure>
         <PictureContainer>
           {!isLoading ? (

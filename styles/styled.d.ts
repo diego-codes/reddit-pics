@@ -5,6 +5,7 @@ declare module 'styled-components' {
     bg01: string
     bg02: string
     bg03: string
+    border01: string
     text01: string
     text02: string
     primary: string

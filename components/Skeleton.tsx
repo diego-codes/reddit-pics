@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Skeleton = styled.div<{ inlineSize?: string; blockSize?: string }>`
-  background-color: ${props => props.theme.bg03};
+  background-color: ${props => props.theme.border01};
   inline-size: ${props => props.inlineSize || 'inherit'};
   block-size: ${props => props.blockSize || 'inherit'};
   overflow: hidden;
