@@ -5,8 +5,8 @@ import { RedditComment, RedditListing } from '../types/RedditImage'
 import Card from './Card'
 import StyledLink from './StyledLink'
 import RedditDetails from './RedditDetails'
-import Comment from './Comment'
 import { Breakpoint, mediaQuery } from '../styles/responsive'
+import TopCommentsList from './TopCommentsList'
 
 const Container = styled.div<{ imageHeight: number; imageWidth: number }>`
   ${mediaQuery(Breakpoint.SM)} {
@@ -31,11 +31,17 @@ const Picture = styled.img`
   background-color: ${props => props.theme.bg03};
 `
 
+const DETAILS_INLINE_PADDING = '1.5em'
+
 const Details = styled.div`
-  padding: 1em 1.5em;
+  padding: 1em 0;
   display: flex;
   flex-direction: column;
   max-block-size: inherit;
+`
+
+const Header = styled.div`
+  padding: 0 ${DETAILS_INLINE_PADDING};
 `
 
 const Title = styled.h1``
@@ -46,26 +52,15 @@ const SubTitle = styled.h2`
   color: ${props => props.theme.text01};
 `
 
-const CommentsTitle = styled.h2`
-  ${getSingleResponsiveTypographyStyle(Size.H4)}
-  margin-block-end: 0.5em;
-`
-
 const CommentsSection = styled.div`
   overflow: auto;
-`
-const CommentsList = styled.ol``
-
-const CommentsListItem = styled.li`
-  margin-block-end: 1.5em;
+  padding: 0 ${DETAILS_INLINE_PADDING};
 `
 
 type ImageDetailsProps = {
   listing: RedditListing
   comments: RedditComment[]
 }
-
-const MAX_COMMENTS = 5
 
 const ImageDetails: FC<ImageDetailsProps> = ({ listing, comments = [] }) => (
   <Card>
@@ -75,7 +70,7 @@ const ImageDetails: FC<ImageDetailsProps> = ({ listing, comments = [] }) => (
     >
       <Picture src={listing.url} alt={listing.title} />
       <Details>
-        <div>
+        <Header>
           <Title>
             <StyledLink href={`https://reddit.com${listing.permalink}`}>
               {listing.title}
@@ -84,16 +79,9 @@ const ImageDetails: FC<ImageDetailsProps> = ({ listing, comments = [] }) => (
           <SubTitle>
             <RedditDetails obj={listing} />
           </SubTitle>
-        </div>
+        </Header>
         <CommentsSection>
-          <CommentsTitle>Top {MAX_COMMENTS} comments:</CommentsTitle>
-          <CommentsList>
-            {comments.slice(0, MAX_COMMENTS).map(comment => (
-              <CommentsListItem key={comment.id}>
-                <Comment comment={comment} />
-              </CommentsListItem>
-            ))}
-          </CommentsList>
+          <TopCommentsList comments={comments} maxComments={5} />
         </CommentsSection>
       </Details>
     </Container>
