@@ -24,7 +24,8 @@ const Search: FC<SearchProps> = ({
     <form onSubmit={handleSubmit}>
       <TextInput
         id="img-search"
-        label="Search pics"
+        aria-label="Search pics"
+        placeholder="Search pics"
         type="search"
         value={value}
         onChange={handleValueChage}
