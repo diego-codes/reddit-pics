@@ -26,8 +26,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Reddit Pics</title>
       </Head>
 
       <PageLayout>

@@ -22,7 +22,6 @@ export default function Post() {
     <>
       <Head>
         <title>Reddit Pics{isSuccess ? ` - ${data.listing.title}` : ''}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <PageLayout>
