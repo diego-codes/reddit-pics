@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useQuery } from 'react-query'
 import GalleryGrid from '../components/GalleryGrid'
+import LayoutContainer from '../components/LayoutContainer'
 import PageLayout from '../components/PageLayout'
 import { fetchImages } from '../services/reddit'
 import RedditImage from '../types/RedditImage'
@@ -15,7 +16,9 @@ export default function Index() {
       </Head>
 
       <PageLayout>
-        <GalleryGrid images={data} isLoading={isLoading}></GalleryGrid>
+        <LayoutContainer>
+          <GalleryGrid images={data} isLoading={isLoading}></GalleryGrid>
+        </LayoutContainer>
       </PageLayout>
     </>
   )

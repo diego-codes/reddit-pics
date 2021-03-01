@@ -1,4 +1,5 @@
 type RedditImage = {
+  id: string
   url: string
   thumbnail: string
   title: string

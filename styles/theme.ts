@@ -1,12 +1,12 @@
 import { DefaultTheme } from 'styled-components'
 
 const theme: DefaultTheme = {
-  bg01: '#131416',
-  bg02: '#1f2123',
-  bg03: '#25272A',
-  text01: '#F0F6FA',
-  text02: '#C1D4E1',
-  primary: '#65F4AD',
+  bg01: '#FBFBFB',
+  bg02: '#EFEFEF',
+  bg03: '#ADADAD',
+  text01: '#626262',
+  text02: '#0C0C0C',
+  primary: '#2F54EB',
 }
 
 export default theme

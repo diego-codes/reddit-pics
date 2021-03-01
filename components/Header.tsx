@@ -3,15 +3,12 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import LayoutContainer from './LayoutContainer'
 
-const StickyContainer = styled.div`
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  inline-size: 100%;
-  position: sticky;
-  background-color: ${props => props.theme.bg02};
+const Container = styled(LayoutContainer)`
+  color: red !important;
+  background-color: ${props => props.theme.bg01};
+  border-block-end: 1px solid ${props => props.theme.bg03};
 `
-
-const Container = styled.div`
+const Content = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -30,18 +27,16 @@ const TitleLink = styled.a`
 
 const Header: FC = ({ children }) => {
   return (
-    <StickyContainer>
-      <LayoutContainer>
-        <Container>
-          <Title>
-            <Link href="/" passHref>
-              <TitleLink>Reddit Pics</TitleLink>
-            </Link>
-          </Title>
-          {children && <div>{children}</div>}
-        </Container>
-      </LayoutContainer>
-    </StickyContainer>
+    <Container>
+      <Content>
+        <Title>
+          <Link href="/" passHref>
+            <TitleLink>Reddit Pics</TitleLink>
+          </Link>
+        </Title>
+        {children && <div>{children}</div>}
+      </Content>
+    </Container>
   )
 }
 

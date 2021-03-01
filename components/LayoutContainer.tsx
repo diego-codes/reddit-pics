@@ -1,35 +1,24 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 
-const BackgroundContainer = styled.div<{
-  padding: string
-  backgroundColor: string
-}>`
-  padding: ${props => props.padding};
+const BackgroundContainer = styled.div`
+  padding: 1.5rem;
   display: flex;
   justify-content: center;
-  background-color: ${props => props.backgroundColor};
   inline-size: 100%;
 `
-const Container = styled.div<{ narrow: boolean }>`
-  inline-size: ${props => (props.narrow ? '38rem' : '100%')};
+const Container = styled.div<{ fullBleed: boolean }>`
+  inline-size: ${props => (!props.fullBleed ? '70rem' : '100%')};
   max-inline-size: 65rem;
 `
 
 type LayoutContainerProps = {
-  backgroundColor?: string
-  padding?: string
-  narrow?: boolean
+  fullBleed?: boolean
 }
-const LayoutContainer: FC<LayoutContainerProps> = ({
-  children,
-  backgroundColor = 'inherit',
-  padding = '1.5rem',
-  narrow,
-}) => {
+const LayoutContainer: FC<LayoutContainerProps> = ({ children, fullBleed }) => {
   return (
-    <BackgroundContainer backgroundColor={backgroundColor} padding={padding}>
-      <Container narrow={narrow}>{children}</Container>
+    <BackgroundContainer>
+      <Container fullBleed={fullBleed}>{children}</Container>
     </BackgroundContainer>
   )
 }

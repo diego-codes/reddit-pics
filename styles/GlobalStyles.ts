@@ -14,16 +14,16 @@ export default createGlobalStyle`
 
   html {
     box-sizing: border-box;
-    font-family: 'Rubik', 'Helvetica Neue', 'Arial', sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 300;
     line-height: 1.75;
     
-    background-color: ${props => props.theme.bg03};
+    background-color: ${props => props.theme.bg02};
     color: ${props => props.theme.text01}
   }
   
   body {
-    background-color: ${props => props.theme.bg01};
+    background-color: ${props => props.theme.bg02};
   }
 
   body, ol, ul {
@@ -40,6 +40,7 @@ export default createGlobalStyle`
     margin-block-end: 1.38rem;
     font-weight: inherit;
     line-height: 1.3;
+    color: ${props => props.theme.text02}
   }
 
   h1 {
